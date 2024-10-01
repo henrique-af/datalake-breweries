@@ -1,7 +1,8 @@
 import requests
 from save_to_bronze import save_to_bronze
 import pandas as pd
-from transform_breweries import consolidate_address, remove_closed_breweries
+from transform_breweries import transform_to_silver
+from partition_by_country import save_to_silver_partitioned_by_location
 from sqlalchemy import create_engine
 
 def extract_breweries_data(api_url: str):
@@ -27,14 +28,15 @@ def extract_breweries_data(api_url: str):
     
 #save_to_bronze(extract_breweries_data('https://api.openbrewerydb.org/breweries'))
 
-df = pd.read_parquet('data/bronze/breweries_raw_20240930_215445.parquet')
+#df = pd.read_parquet('data/bronze/breweries_raw_20240930_215445.parquet')
 #df.to_excel('teste.xlsx')
 
-#df_silver = consolidate_address(df)
-#df_silver = remove_closed_breweries(df_silver)
+# df_silver = transform_to_silver(df)
+# save_to_silver_partitioned_by_location(df_silver)
 
-#engine = create_engine('sqlite:///:memory:')
-#df_silver.to_sql('breweries', con=engine, if_exists='replace', index=False)
-#query = "SELECT * FROM breweries;"
-#closed_breweries = pd.read_sql_query(query, engine)
-#print(closed_breweries)
+# df_usa = pd.read_parquet('data/silver/United States/breweries_United States_20241001_194805.parquet')
+# engine = create_engine('sqlite:///:memory:')
+# df_usa.to_sql('breweries', con=engine, if_exists='replace', index=False)
+# query = "SELECT * FROM breweries;"
+# closed_breweries = pd.read_sql_query(query, engine)
+# print(closed_breweries)
