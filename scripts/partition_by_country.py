@@ -2,9 +2,6 @@ import os
 import pandas as pd
 import logging
 
-import os
-import pandas as pd
-import logging
 
 def save_to_silver_partitioned_by_location(df, silver_path='data/silver/'):
     if not os.path.exists(silver_path):
