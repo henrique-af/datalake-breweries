@@ -1,4 +1,4 @@
-# BEES Data Engineering – Breweries Case
+# Breweries API Project
 
 ## Objective
 
